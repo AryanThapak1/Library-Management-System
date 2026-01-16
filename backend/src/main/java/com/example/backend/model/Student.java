@@ -36,6 +36,4 @@ public class Student {
     @NotNull
     private String password;
 
-    public Student() {
-    }
 }
