@@ -25,7 +25,7 @@ export default function Login() {
       const userData = await login(data.email, data.password);
       setAccessToken(userData.accessToken);
       setRole(userData.role);
-      router.push("/Profile");
+      router.push("/profile");
     } catch (error) {
       console.error("Login failed", error);
       setWrongPassword(true);
@@ -119,7 +119,7 @@ export default function Login() {
           <p className="mt-6 text-center text-sm text-gray-500">
             Not a member?{" "}
             <Link
-              href="/Signup"
+              href="/signup"
               className="font-semibold text-teal-600 hover:text-teal-500 transition"
             >
               Sign up

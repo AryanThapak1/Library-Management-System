@@ -36,7 +36,7 @@ export default function Navbar() {
     await logout();
     setTimeout(() => {
       removeAccess();
-      router.push("/Login");
+      router.push("/login");
     }, 2000);
   };
 

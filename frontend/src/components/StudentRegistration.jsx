@@ -70,7 +70,7 @@ export default function StudentRegistration() {
 
     if (response.ok) {
       setTimeout(() => {
-        router.push("/Login");
+        router.push("/login");
       }, 3000);
     }
   };
