@@ -6,7 +6,7 @@ const HomePage = () => {
   const router = useRouter();
 
   const onClickHandler = () => {
-    router.push("/Signup");
+    router.push("/signup");
   };
 
   return (

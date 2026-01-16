@@ -1,39 +1,39 @@
 export const guestNavigation = [
   { name: "Home", href: "/" },
-  { name: "Login", href: "/Login" },
+  { name: "Login", href: "/login" },
 ];
 
 export const userNavigation = [
   {
     name: "Search Books",
-    href: "/Search-book",
+    href: "/search-book",
   },
   {
     name: "Requests",
-    href: "/Requests",
+    href: "/requests",
   },
   {
     name:"Chatbox",
-    href:"/Chatbox"
+    href:"/chatbox"
   },
   {
     name:"My Requests",
-    href:"/MyRequests"
+    href:"/my-requests"
   }
 ];
 
 const adminOptions = [
   {
     name: "Dashboard",
-    href: "/Dashboard",
+    href: "/dashboard",
   },
   {
     name: "Student",
-    href: "/Student",
+    href: "/student",
   },
   {
     name:"Add Book",
-    href:"/Addbook"
+    href:"/addbook"
   }
 ];
 
