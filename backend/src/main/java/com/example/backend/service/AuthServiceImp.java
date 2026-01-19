@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.dto.AdminDto;
@@ -19,15 +20,18 @@ public class AuthServiceImp implements AuthServiceInterface{
 	@Autowired
 	AdminRepository adminRepository;
 	
-//	@Autowired
-//    BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+    BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
 
 	@Override
 	public StudentDto registerStudent(Student student) {
-		if(studentRepository.findById(student.getId()).isPresent()) {
-			return null;
-		}
-//		student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
+		 if (studentRepository.existsByEmail(student.getEmail())) {
+		        throw new RuntimeException("Student already exists with this email");
+		    }
+		 if (studentRepository.existsByEnrollementNumber(student.getEnrollementNumber())) {
+			    throw new RuntimeException("Enrollment number already registered");
+			}
+		student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
 		Student createdStudent=studentRepository.save(student);
 		
 		return StudentMapper.toDto(createdStudent);
