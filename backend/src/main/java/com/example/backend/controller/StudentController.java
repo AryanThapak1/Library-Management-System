@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.example.backend.dto.StudenttDto;
+import com.example.backend.dto.StudentDto;
 import com.example.backend.response.ApiResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,8 +26,8 @@ public class StudentController {
 
 
     @GetMapping("details")
-    public ResponseEntity<ApiResponse<List<StudenttDto>>> studentDetails() {
-        List<StudenttDto> studentDetail = studentServiceInterface.getAllStudents();
+    public ResponseEntity<ApiResponse<List<StudentDto>>> studentDetails() {
+        List<StudentDto> studentDetail = studentServiceInterface.getAllStudents();
         if(!ObjectUtils.isEmpty(studentDetail)) return ResponseEntity.ok(new ApiResponse<>(200, "Students fetched successfully", studentDetail));
         else{
             return ResponseEntity.ok(new ApiResponse<>(500, "Students not found", null));
