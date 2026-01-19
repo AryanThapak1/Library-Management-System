@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.example.backend.dto.StudentDto;
 import com.example.backend.response.ApiResponse;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class StudentController {
     private BookServiceInterface bookServiceInterface;
 
 
-    @GetMapping("details")
+    @GetMapping("/details")
     public ResponseEntity<ApiResponse<List<StudentDto>>> studentDetails() {
         List<StudentDto> studentDetail = studentServiceInterface.getAllStudents();
         if(!ObjectUtils.isEmpty(studentDetail)) return ResponseEntity.ok(new ApiResponse<>(200, "Students fetched successfully", studentDetail));
