@@ -36,6 +36,15 @@ public class Admin {
 
     @NotNull
     private String password;
-
+    
+    @NotNull
+    private String college;
+    
+    @NotNull
+    @Column(unique = true)
+    private String libraryId;
+    
+    @NotNull
+    private String branch;
 }
 

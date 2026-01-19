@@ -3,7 +3,6 @@
 import Input from "./Input";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { REQUEST_URL } from "@/utils/Constant";
 import { useRouter } from "next/navigation";
 import { userSignup } from "@/utils/apiCalls";
 
@@ -72,7 +71,7 @@ export default function LibrarianRegistration() {
 
     if (response.ok) {
       setTimeout(() => {
-        router.push("/Login");
+        router.push("/login");
       }, 3000);
     }
   };
@@ -147,7 +146,7 @@ export default function LibrarianRegistration() {
 
           <p className="mt-6 text-center text-sm text-gray-500">
             <Link
-              href="/StudentRegistration"
+              href="/student-registration"
               className="font-semibold text-teal-600 hover:text-teal-500 transition"
             >
               Are you a student?

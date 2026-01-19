@@ -1,6 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.dto.StudenttDto;
+import com.example.backend.dto.StudentDto;
 import com.example.backend.mapper.StudentMapper;
 import com.example.backend.model.Student;
 import com.example.backend.repository.StudentRepository;
@@ -15,12 +15,12 @@ public class StudentServiceImp implements StudentServiceInterface {
     private StudentRepository studentRepository;
 
     @Override
-    public List<StudenttDto> getAllStudents() {
+    public List<StudentDto> getAllStudents() {
         List<Student> students = studentRepository.findAll();
         if(students.isEmpty()){
             return null;
         }
-        List<StudenttDto> studentDtos = students.stream().map(student -> StudentMapper.toDto(student)).toList();
+        List<StudentDto> studentDtos = students.stream().map(student -> StudentMapper.toDto(student)).toList();
         if(studentDtos.isEmpty()) return null;
         return studentDtos;
     }
