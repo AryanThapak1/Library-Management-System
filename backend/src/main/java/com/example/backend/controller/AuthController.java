@@ -4,13 +4,16 @@ import com.example.backend.dto.AdminDto;
 import com.example.backend.model.Admin;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.dto.AuthDto;
 import com.example.backend.dto.StudentDto;
+import com.example.backend.model.Auth;
 import com.example.backend.model.Student;
 import com.example.backend.response.ApiResponse;
 import com.example.backend.service.AuthServiceImp;
@@ -37,6 +40,22 @@ public class AuthController {
 		if(admin==null) return ResponseEntity.ofNullable(null);
 		AdminDto createdAdmin=authService.registerLibrarian(admin);
 		return ResponseEntity.ok(new ApiResponse<AdminDto>(200,"Success",createdAdmin));
+	}
+	
+	@PostMapping("/student/login")
+	  public ResponseEntity<ApiResponse<AuthDto>> loginStudent(@RequestBody Auth credentials){
+		try {
+		if(credentials==null) {
+			return ResponseEntity.ofNullable(null);
+		}
+		
+		AuthDto auth=authService.loginStudent(credentials);
+		return ResponseEntity.ok(new ApiResponse<AuthDto>(200,"Success",auth));
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                .body(new ApiResponse<>(401, e.getMessage(), null));
+		}
 	}
 	
 }

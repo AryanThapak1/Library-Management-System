@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.example.backend.dto.AdminDto;
 import com.example.backend.dto.AuthDto;
 import com.example.backend.dto.StudentDto;
+import com.example.backend.mapper.AuthMapper;
 import com.example.backend.mapper.StudentMapper;
+import com.example.backend.model.Auth;
 import com.example.backend.model.Student;
 import com.example.backend.repository.AdminRepository;
 import com.example.backend.repository.StudentRepository;
@@ -22,6 +24,8 @@ public class AuthServiceImp implements AuthServiceInterface{
 	@Autowired
 	AdminRepository adminRepository;
 	
+	@Autowired
+	JwtService jwtService;
 	
     BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
 
@@ -63,9 +67,16 @@ public class AuthServiceImp implements AuthServiceInterface{
 
 
 	@Override
-	public AuthDto loginStudent() {
+	public AuthDto loginStudent(Auth credentials) {
 		// TODO Auto-generated method stub
-		return null;
+		Student student=studentRepository.findByEmail(credentials.getEmail());
+		if(!bCryptPasswordEncoder.matches(credentials.getPassword(), student.getPassword())) {
+			throw new RuntimeException("Invalid email or password");
+		}
+		
+		String accessToken=jwtService.generateAccessToken(student.getId(), student.getEmail(), "Student");
+		String refreshToken=jwtService.generateRefreshToken(student.getId(), student.getEmail(), "Student");
+		return AuthMapper.toDto(accessToken, refreshToken);
 	}
 
 
