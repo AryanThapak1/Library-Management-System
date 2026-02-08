@@ -5,7 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,32 +33,37 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
+    @NotBlank
     private String name;
 
-    @NotNull
+    @NotBlank
     private String author;
 
     @NotNull
-    private int ISBN;
+    @Positive
+    private Integer ISBN;
 
     @NotNull
+    @Positive
     private Float price;
 
     @NotNull
-    private int stock;
+    @PositiveOrZero
+    private Integer stock;
 
 
     @NotFound(action = NotFoundAction.IGNORE)
+    @Size(min = 1, message = "description cannot be empty")
     private String description;
 
     @NotFound(action = NotFoundAction.IGNORE)
+    @Size(min = 1, message = "ebookAddress cannot be empty")
     private String ebookAddress;
 
-    @NotNull
+    @NotBlank
     private String coverImageAddress;
 
-    @NotNull
-    private List<String> category;
+    @NotEmpty
+    private List<@NotBlank String> category;
 
 }

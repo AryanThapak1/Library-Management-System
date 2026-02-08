@@ -5,18 +5,19 @@ import com.example.backend.service.BookServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.example.backend.dto.StudentDto;
 import com.example.backend.response.ApiResponse;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.UUID;
 
-@Controller("/student")
+@RestController
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class StudentController {
     private BookServiceInterface bookServiceInterface;
 
 
-    @GetMapping("details")
+    @GetMapping("/details")
     public ResponseEntity<ApiResponse<List<StudentDto>>> studentDetails() {
         List<StudentDto> studentDetail = studentServiceInterface.getAllStudents();
         if(!ObjectUtils.isEmpty(studentDetail)) return ResponseEntity.ok(new ApiResponse<>(200, "Students fetched successfully", studentDetail));

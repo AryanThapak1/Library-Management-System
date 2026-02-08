@@ -15,6 +15,7 @@ public class AdminMapper {
                 .name(admin.getName())
                 .email(admin.getEmail())
                 .password(admin.getPassword())
+                .college(admin.getCollege())
                 .libraryId(admin.getLibraryId())
                 .branch(admin.getBranch())
                 .build();
