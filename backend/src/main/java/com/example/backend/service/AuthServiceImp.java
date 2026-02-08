@@ -23,6 +23,7 @@ public class AuthServiceImp implements AuthServiceInterface{
 	
     BCryptPasswordEncoder bCryptPasswordEncoder= new BCryptPasswordEncoder();
 
+		
 	@Override
 	public StudentDto registerStudent(Student student) {
 		 if (studentRepository.existsByEmail(student.getEmail())) {
@@ -37,11 +38,13 @@ public class AuthServiceImp implements AuthServiceInterface{
 		return StudentMapper.toDto(createdStudent);
 	}
 
+
 	@Override
 	public AdminDto registerLibrarian() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public AuthDto loginStudent() {
@@ -49,11 +52,10 @@ public class AuthServiceImp implements AuthServiceInterface{
 		return null;
 	}
 
+
 	@Override
 	public AuthDto loginLibrarian() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 }
