@@ -48,4 +48,14 @@ public class BookServiceImp implements BookServiceInterface {
                 .map(BookMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public BookDto addBook(Book book) {
+     if(book == null) return null;
+
+     Book createdBook=bookRepository.save(book);
+     return BookMapper.toDto(createdBook);
+    }
+
+
 }

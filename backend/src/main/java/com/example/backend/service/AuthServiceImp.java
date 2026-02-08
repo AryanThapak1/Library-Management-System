@@ -1,5 +1,7 @@
 package com.example.backend.service;
 
+import com.example.backend.mapper.AdminMapper;
+import com.example.backend.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,10 +42,24 @@ public class AuthServiceImp implements AuthServiceInterface{
 
 
 	@Override
-	public AdminDto registerLibrarian() {
+	public AdminDto registerLibrarian(Admin admin) {
 		// TODO Auto-generated method stub
-		return null;
+	if(adminRepository.existsByEmail(admin.getEmail()))
+	{
+		throw new RuntimeException("Admin already exists with this email");
 	}
+	if(adminRepository.existsByLibraryId(admin.getLibraryId()))
+	{
+		throw new RuntimeException("Librarian with this id already present");
+	}
+
+	admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+	Admin createdAdmin=adminRepository.save(admin);
+
+	return AdminMapper.toDto(createdAdmin);
+
+	}
+
 
 
 	@Override

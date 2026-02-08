@@ -1,5 +1,8 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.AdminDto;
+import com.example.backend.model.Admin;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,14 @@ public class AuthController {
 		StudentDto createdStudent=authService.registerStudent(student);
 		return ResponseEntity.ok(new ApiResponse<StudentDto>(200,"Success",createdStudent));
 		
+	}
+
+	@PostMapping("/admin/register")
+	public ResponseEntity<ApiResponse<AdminDto>> registerLibrarian(@Valid @RequestBody Admin admin)
+	{
+		if(admin==null) return ResponseEntity.ofNullable(null);
+		AdminDto createdAdmin=authService.registerLibrarian(admin);
+		return ResponseEntity.ok(new ApiResponse<AdminDto>(200,"Success",createdAdmin));
 	}
 	
 }
